@@ -1,7 +1,7 @@
 use std::fs;
 
 fn main() {
-    let input =  read_file_string("src/input.txt").unwrap();
+    let input = read_file_string("src/input.txt").unwrap();
 
     let mut all_calories_per_elf: Vec<i64> = Vec::new();
     let all_calories = input.lines().collect::<Vec<_>>();
