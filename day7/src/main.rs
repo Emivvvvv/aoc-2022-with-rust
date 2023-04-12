@@ -24,7 +24,7 @@ fn calc_dir_size<'a>(console_input: Vec<&'a str>, ten_k_total: &mut i128, lines:
 
             //I know i cheated... I'm in my midterm week so I don't want to spend more time on it. Maybe I can fix it in the future.
             //              |||||||   I calculated the free space that I need before...
-            //              vvvvvvv   A couple solutions come to my mind actually but I didn't find them efficient that's why I'll skip to improve this time.
+            //              vvvvvvv   A couple solutions came to my mind actually but I didn't find them efficient that's why I'll skip to improve this time.
             if dir_size >= (3636666) && *curr_min > dir_size {
                 *curr_min = dir_size;
             }
@@ -71,18 +71,19 @@ mod tests {
     #[test]
     fn test_console_input_finder() {
         let input = read_file_string("src/test.txt").unwrap();
-        let lines = input.lines().collect::<Vec<_>>();
+        let mut lines = input.lines().collect::<Vec<_>>();
 
-        assert_eq!(vec!["4060174 j", "8033020 d.log", "5626152 d.ext", "7214296 k"], console_input_finder("d", &lines));
+        assert_eq!(vec!["4060174 j", "8033020 d.log", "5626152 d.ext", "7214296 k"], console_input_finder("d", &mut lines));
     }
 
     #[test]
     fn test_calc_dir_size() {
         let input = read_file_string("src/test.txt").unwrap();
-        let lines = input.lines().collect::<Vec<_>>();
+        let mut lines = input.lines().collect::<Vec<_>>();
         let mut ten_k_total: i128 = 0;
+        let mut curr_min: i128 = 0;
 
-        calc_dir_size(console_input_finder("/", &lines), &mut ten_k_total, &lines);
+        calc_dir_size(console_input_finder("/", &mut lines), &mut ten_k_total, &mut lines, &mut curr_min);
         assert_eq!(ten_k_total, 95437);
     }
 }
